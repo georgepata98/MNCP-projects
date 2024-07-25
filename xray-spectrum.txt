@@ -1,0 +1,61 @@
+MXR-160/21 spectrum at 150kV with .8mm Be
+c ---------- cell card ----------
+1   0              (1 -4 -3):(4 -5 -3 -7 10 11)                                 $ void
+2  11 -8.96        (1 -4 3 -8):(4 -5 -6 7 -8 9):(4 -5 -7 -8 3)                  $ Cu housing
+3  21 -1.848       -10                                                          $ Be filter
+4  31 -19.3        -11                                                          $ W target
+5  12 -11.35        12 -13                                                      $ Pb collimator
+6  13 -2.33        -14:-15:-16                                                  $ NOMEX detector
+21 42 -1.205e-3    -20                                                          $ scoring probe
+98 41 -1.205e-3    #1 #2 #3 #4 #5 #6 #21 -99                                    $ air
+99  0               99
+
+c ---------- surface card ----------
+1  pz   0
+3  cz   3.55
+4  pz   20.9
+5  pz   27.9
+6  px   3.55
+7  px   2.55
+8  cz   5
+9  rcc  2.55 0 23.15  1 0 0  1.505              $ tube hole
+10 rpp  2.47 2.55  -2 2  21.4 24.9              $ Be filter
+11 rcc  0 0 23.15  -1.026 0 2.8191  0.96        $ target
+12 rcc  16.2 0 23.15  1.5 0 0  3.12             $ collimator hole
+13 rcc  16.2 0 23.15  1.5 0 0  10               $ collimator lead
+14 rpp  99.55 100.45  -0.6 0.6  20.65 25.65     $ NOMEX
+15 rcc  99.55 0.6 23.15  0.9 0 0  2.5           $ NOMEX
+16 rcc  99.55 -0.6 23.15  0.9 0 0  2.5          $ NOMEX
+20 rpp  3.55 6.55  -1.5 1.5  21.65 24.65        $ scoring probe
+99 so   150
+
+c ---------- data card ----------
+mode e p
+imp:e 1 1 1 1 1 1 1 1 0
+imp:p 1 1 1 1 1 1 1 1 0
+c material data card
+m11 29000 1.000000
+m12 82000 1.000000
+m13 14000 1.000000
+m21  4000 1.000000
+m31 74000 1.000000
+m41  6000 0.000150 &
+     7014 0.786245 &
+     7015 0.002855 &
+     8016 0.210670 &
+     8017 0.000080
+m42  6000 0.000150 &
+     7014 0.786245 &
+     7015 0.002855 &
+     8016 0.210670 &
+     8017 0.000080
+c source card
+sdef pos=0 0 9.3  axs=0 0 1  ext=0  vec=0 0 1  dir=1  par=e  erg=0.15      $ pencil beam
+c tally card
+e15 0 1e-6 150i 0.15
+e4  0 1e-6 150i 0.15
+f4:p  21                                $ avg. flux inside cell 21
+f5:p  100 0 23.15 10     	          $ (x,y,z,r) dose detector
+df5   ic=10 iu=2 log                    $ ic=10 (ICRP-21), iu=2 (Sv/h/source_particle)
+f15:p 5.05 0 23.15 1.7                  $ (x,y,z,r) spectrum detector
+ctme 180

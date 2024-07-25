@@ -1,0 +1,69 @@
+HPGe detector
+c ---------------Cell Cards------------------
+1 1 -2.7  (-1 2 -8 6):(-2 5 6 -7):(-1 2 9 -10) $Holder
+2 1 -2.7  -3 14 8 -9 $down handle of the Holder
+3 1 -2.7  -3 14 10 -11 $up handle of the Holder
+4 1 -2.7  (-4 5 -6 13):(-5 13 -12) $down pipe of the Holder
+5 3 -0.95  -14 22 -11 $HD PE
+6 2 -5.323  (-14 15 18 -22):(-15 -22 21) $outer dead layer
+7 2 -5.323  (-16 17 -20 18):(-17 -20 19) $inner dead layer
+8 2 -5.323  (-15 16 -21 18):(-16 -21 20) $active area
+9 1 -2.7  (-25 24 26 -28):(-24 -28 27) $Endcap
+10 0  -24 -27 26 #1 #2 #3 #4 #5 #6 #7 #8 $vacuum space
+20 4 -0.001225  -100 #1 #2 #3 #4 #5 #6 #7 #8 #9 # 10 $Air
+30 0  100 $Discard Region
+
+c ---------------Surface Cards---------------
+c Beginning of the holder
+1 cz 3.23
+2 cz 3.15
+3 cz 3.45
+4 cz 1.4
+5 cz 1 
+6 pz 0
+7 pz 0.31
+8 pz 4.18
+9 pz 5.04
+10 pz 6.12
+11 pz 6.98
+12 pz -1.61
+13 pz -2.54
+c End of holder
+c Beginning of crystal
+14 cz 3.025
+15 cz 2.96709 $is played
+16 cz 0.47503
+17 cz 0.475
+18 pz 2.25
+19 pz 5.05
+20 pz 5.05003
+21 pz 6.82209 $is played
+22 pz 6.88
+c End of crystal
+c Beginning of endcap
+24 cz 3.66
+25 cz 3.81
+26 pz -5.8
+27 pz 7.33
+28 pz 7.48
+c End of endcap
+c Beginning 
+100 so 20
+
+c ---------------Data Cards------------------ 
+mode p e
+imp:p 1 1 1 1 1 1 1 1 1 1 1 0
+imp:n 0 0 0 0 0 0 0 0 0 0 0 0 
+imp:e 1 1 1 1 1 1 1 1 1 1 1 0
+sdef pos=0 0 7.48 par=2 erg=2
+MPHYS
+c ---------------Material Cards--------------
+m1 013000 1 $Aluminum
+m2 032000 1 $Germanium
+m3 006000 -0.857 001000 -0.143 $HD PE
+m4 008000 0.3 007000 0.7 $air
+c ---------------Tally Card------------------
+f8:p,e 8
+e8 0 1e-5 1.99999 2 2.5
+nps 1e7
+

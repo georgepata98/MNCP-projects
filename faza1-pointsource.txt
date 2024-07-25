@@ -1,0 +1,106 @@
+HPGe detector
+c ---------------Cell Cards------------------
+1 1 -5.36 ((-9 2 -3):(-7 8 9):(9 -1 2 -8)) &
+          #2 #6 #7 imp:p,e 1                               $detector's crystal (active part)
+2 0 (-4 2 -5):(5 -6) imp:p,e 1                             $crystal's hole
+3 2 -2.702 (-3 1 -10 12):(-1 12 -13) imp:p,e 1             $mount cup
+4 3 -1.397 -10 3 -11  imp:p,e 1                            $mount cup top (insulator)
+5 2 -2.702 (-15 14 -16):(-16 17 -14 18) imp:p,e 1          $end cap
+6 5 -0.534 (-1 19 2 -8):(-9 -3 20):(21 8 9 -7) imp:p,e 1   $dead layer
+7 6 -2.37  (-23 6 5):(-5 2 4 -22) imp:p,e 1                $hole contact layer
+8 0 (18 -14 -17) #1 #2 #3 #4 #6 #7 imp:p,e 1               $vacuum
+9 7 -1.18 (28 -30 26 -27):(-26 25 15 -30):(-25 24 15 -29) &
+      imp:p,e 1                                            $Plexiglass source holder
+10 7 -1.18 (-33 29 -31):(33 -34 29 -32) imp:p,e 1          $tray (plexiglass)
+11 7 -1.18 (-33 35 -36):(33 -34 32 -36) imp:p,e 1          $cover (plexiglass)
+12 8 -0.93 (-33 31 -35) #13             imp:p,e 1          $source place (polyethylene)
+13 9 -8.86 (-39 37 -38)                 imp:p,e 1          $Co-60 source
+14 10 -11.35 (44 -43 40 -41):(42 -43 -40) imp:p,e 1        $lead castle (shield)
+99 4 -1.205e-3 -100 #1 #2 #3 #4 #5 #6 #7 #8 #9 &
+       #10 #11 #12 #13 #14 imp:p,e 1                           $surrounding region     
+100 0 100 imp:p,e 0                      $discard region
+
+c ---------------Surface Cards---------------
+c
+c crystal
+1 cz 2.94                      $crystal's radius
+2 pz 0                         $base of the crystal
+3 pz 4.6                       $top of the crystal
+4 cz 0.465                     $crystal's hole-radius
+5 pz 2.805                     $crystal's hole-depth
+6 sz 2.805 0.465               $cryastal's hole-top curve
+7 tz 0 0 3.8 2.15 0.8 0.79     $torus
+8 pz 3.8                       $cuts torus in half
+9 cz 2.14                      $cuts torus
+c
+c mount cup
+10 cz 3.016                    $mount cup radius=crystal radius+mount cup wall
+11 pz 4.603                    $mount cup top
+12 pz -4.797                   $mount cup base
+13 pz -4.477                   $mount cup base
+C
+C end cap 
+14 pz 4.903                    $end cap top
+15 pz 5.033                    $end cap top
+16 cz 3.5                      $end cap wall
+17 cz 3.37                     $end cap wall
+18 pz -5.967                   $end cap base
+c
+c dead layers
+19 cz 2.87                     $side dead layer
+20 pz 4.53                     $top dead layer
+21 tz 0 0 3.73 2.15 0.8 0.73   $torus dead layer
+22 cz 0.46503                  $hole contact layer
+23 sz 2.805 0.46503            $hole contact layer
+c
+c Plexiglass source holder
+24 cz 1
+25 cz 1.77
+26 cz 3.5
+27 cz 5.08
+28 pz 4.543
+29 pz 5.298
+30 pz 5.788
+c
+c source and source place
+31 pz 5.3405                   $tray
+32 pz 5.45175                  $tray
+33 cz 1.51                     $tray
+34 cz 1.75                     $tray
+35 pz 5.4055                   $cover
+36 pz 5.498                    $cover
+37 pz 5.3595                   $Co-60
+38 pz 5.3655                   $Co-60
+39 cz 0.15                     $Co-60
+c
+c Lead castle (shield)
+40 cz 15                       $inner radius
+41 cz 20                       $outer radius
+42 pz 35                       $inner height
+43 pz 40                       $outer height
+44 pz -6                       $base
+100 so 60  
+
+c ---------------Data Cards------------------ 
+mode p e
+sdef cel=13 pos=0 0 5.3595 par=2 erg=d1 axs=0 0 1 rad=d2 ext=d3 
+si1 L  1.173  1.332           $ Discrete Co-60 Energies          
+sp1 D  1.0    1.0             $ Equiprobable
+si2  0   0.15
+sp2 -21  1
+si3  0   0.006
+c ---------------Material Cards--------------
+m1 32000 1                             $Germanium
+m2 13000 1                             $Aluminum
+m3 6000 10 1000 8 8000 4               $MYLAR
+m4 8000 0.3 7000 0.7                   $air
+m5 3000 1                              $Lithium 
+m6 5000 1                              $Boron
+m7 6000 0.3333 1000 0.5333 8000 0.1334 $plexiglass
+m8 1000 0.666662 6000 0.333338         $polyetilene
+m9 27060 1                             $Cobalt-60
+m10 82000 1                            $lead
+c ---------------Tally Card------------------
+f8:p,e 1
+e8 0 1e-5 1.99999 2 2.5
+nps 1e7
