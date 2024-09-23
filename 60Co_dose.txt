@@ -1,0 +1,67 @@
+Co-60 gamma source - dose calculation (1.173 MeV, 1.332 MeV)
+c ---------- cell card ----------
+1   10 -8.90      -1 -4 5                                                       $ sursa de Co
+2   11 -8.03      -2 1 -3 6                                                     $ peretele de otel
+5   12 -2.70      -11 -9 10                                                     $ electrodul din Al
+6   13 -1.205e-3  (-9 10 11 -12):(-7 9 -12):(-10 8 -12)                         $ volumul det. cu aer
+7   14 -2.26      -7 8 12 -13                                                   $ stratul de grafit
+8   15 -1.19      -7 8 13 -14                                                   $ stratul de PMMA
+99  90 -1.205e-3   (7:(-7 8 14):(-8 3):(-3 4 -1):(-3 6 2):(-5 6 -1):-6) -100    $ world
+111 0              100
+
+c ---------- surface card ----------
+1   cz   1
+2   cz   1.17
+3   pz   1.66
+4   pz   1.5
+5   pz  -1.5
+6   pz  -1.66
+7   pz   101.18
+8   pz   98.82
+9   pz   101.06
+10  pz   98.94
+11  cz   0.055
+12  cz   0.305
+13  cz   0.314
+14  cz   0.3475
+100 so   150
+
+c ---------- data card ----------
+mode p e
+imp:p 1 1 1 1 1 1 1 0
+imp:e 1 1 1 1 1 1 1 0
+c material card
+m10 27000 1.000000
+m11  6000 0.003635 &
+    25000 0.019870 &
+    15000 0.000793 &
+    16000 0.000511 &
+    14000 0.019434 &
+    24000 0.199443 &
+    28000 0.088343 &
+    26000 0.667971
+m12 13000 1.000000
+m13  6000 0.000150 &
+     7000 0.784429 &
+     8000 0.210750 &
+    18000 0.004671
+m14  6000 1.000000
+m15  6000 0.333333 &
+     1000 0.533334 &
+     8000 0.133333
+m90  6000 0.000150 &
+     7000 0.784429 &
+     8000 0.210750 &
+    18000 0.004671
+c source card
+sdef  x=d1 y=d2 z=d3 erg=1.173 par=2 cel=1    $ sursa gamma in cell 1 intr-un paralelipiped
+si1 -1 1                                      $ x-range limits [-1.0, 1.0] cm
+sp1  0 1                                      $ uniform probability over x
+si2 -1 1                                      $ y-range limits [-1.0, 1.0] cm
+sp2  0 1                                      $ uniform probability over y
+si3 -1.5 1.5                                  $ z-range limits [-1.5, 1.5] cm
+sp3  0 1                                      $ uniform probability over z
+c tally card
+f6:p,e 6
+fm6 1.6022e-10                                $ conversie MeV/g in J/kg
+ctme 10
