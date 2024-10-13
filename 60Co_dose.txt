@@ -27,9 +27,8 @@ c ---------- surface card ----------
 100 so   150
 
 c ---------- data card ----------
-mode p e
+mode p
 imp:p 1 1 1 1 1 1 1 0
-imp:e 1 1 1 1 1 1 1 0
 c material card
 m10 27000 1.000000
 m11  6000 0.003635 &
@@ -62,6 +61,6 @@ sp2  0 1                                      $ uniform probability over y
 si3 -1.5 1.5                                  $ z-range limits [-1.5, 1.5] cm
 sp3  0 1                                      $ uniform probability over z
 c tally card
-f6:p,e 6
+f6:p 6
 fm6 1.6022e-10                                $ conversie MeV/g in J/kg
 ctme 10
