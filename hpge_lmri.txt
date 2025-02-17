@@ -49,13 +49,13 @@ c ___ SOURCE ___
 c Atentie: coordonatele sunt in [cm] iar energia in [MeV]
 sdef pos=0 0 10  erg=0.2  par=2
 c ___ TALLY ___
-c Capetele histogramei: e0=0 si e1=floor(1.1*E_gama)
+c Capetele histogramei: e0=0.01 si e1=floor(1.1*E_gama)
 c deltaE=e1-e0
 c Nr. de bini se calculeaza dupa formulele (deltaE=interval histograma):
 c daca deltaE>=1                -> nr.bini=1000
 c daca deltaE>=0.5 && deltaE<1  -> nr.bini=750
 c daca deltaE<0.5               -> nr.bini=500
-f8:p,e  10          $ tally F8 pentru fotoni si e in cell 10
+f8:p,e  10              $ tally F8 pentru fotoni si e in cell 10
 c ATENTIE: Nu uita sa modifici nr. de bini si capatul superior e1
-e8 0 499i 0.22      $ e0, nr.bini-1, e1
+e8 0.01 499i 0.22       $ e0, nr.bini-1, e1
 ctme 10
