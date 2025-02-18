@@ -53,9 +53,11 @@
 
         bin_width = (e1-e0)/nbins;
         cout << "Largime bin = " << bin_width << " [MeV]" << endl;
-        cout << "Intervalul de energii pe care se integreaza, in [MeV]:" << endl;
+        cout << "Intervalul de energii pe care se integreaza, in [keV]:" << endl;
         cout << "E_stanga  = "; cin >> e_st;
         cout << "E_dreapta = "; cin >> e_dr;
+        e_st = e_st/1000;
+        e_dr = e_dr/1000;
 
         for(int k=1; k<=h1->GetNbinsX(); ++k)
         {
