@@ -1,19 +1,13 @@
 {
     TCanvas *c1 = new TCanvas("c1", "Canvas", 800, 600);
     fstream file;
-    int nbins, i;
+    int nbins=0, i;
     double e0, e1, canal, pulsuri, eroare;
     string a;
 
     
     cout << "\n   Programul se poate folosi pentru plotarea ca histograma a spectrelor rezultate din MCNP si se pot calcula si ariile picurilor ...\nFisierul cu date din MCNP trebuie sa aiba 3 coloane: Energie, Pulsuri, La suta incertitudine puls." << endl << endl;
-    cout << "Nr. total de bini ai histogramei (= nr. linii fisier):\n     "; cin >> nbins;
-    cout << "Capetele din stanga si dreapta ale histogramei, in [MeV]" << endl;
-    cout << "     "; cin >> e0;
-    cout << "     "; cin >> e1;
-    TH1F *h1 = new TH1F("h1", "Histograma MCNP", nbins, e0, e1);
     cout << "Nume fisier text cu date (fara .txt): "; cin >> a;
-
 
     file.open((a + ".txt").c_str(), ios::in);
     if(!file)
@@ -21,6 +15,24 @@
         cout << "\nNu s-a putut accesa fisierul text !" << endl;
         return 1;
     }
+
+    while(1)  // gasire capete histograma (e0 si e1) si numar de bini
+    {
+        file >> canal >> pulsuri >> eroare;
+        if(file.eof()) break;
+        if(nbins==0) { e0 = canal; }
+        e1 = canal;
+        nbins++;
+    }
+    file.close();
+
+    cout << "\nNr. bini = " << nbins << endl;
+    cout << "Capetele histogramei:" << endl;
+    cout << "    " << e0 << " [MeV]\n    " << e1 << " [MeV]" << endl;
+
+    TH1F *h1 = new TH1F("h1", "Histograma MCNP", nbins, e0, e1);
+
+    file.open((a + ".txt").c_str(), ios::in);
     while(!file.eof())
     {
         file >> canal >> pulsuri >> eroare;
@@ -31,6 +43,7 @@
     file.close();
 
 
+
     // Eficacitatea absoluta la fotopic
     cout << "\nSe calculeaza eficacitatea absoluta la fotopic? (da/nu): "; cin >> a;
     if(a=="da" || a=="yes" || a=="y")
@@ -39,21 +52,18 @@
         int bin_st, bin_dr;  // binul din stanga si dreapta ai picului
 
         bin_width = (e1-e0)/nbins;
+        cout << "Largime bin = " << bin_width << " [MeV]" << endl;
         cout << "Intervalul de energii pe care se integreaza, in [MeV]:" << endl;
         cout << "E_stanga  = "; cin >> e_st;
         cout << "E_dreapta = "; cin >> e_dr;
 
-        if(e_st == (e_st/bin_width)*bin_width)
+        for(int k=1; k<=h1->GetNbinsX(); ++k)
         {
-            bin_st = e_st/bin_width;
+            if(e0+k*bin_width < e_st) bin_st = k+1;
+            if(e0+k*bin_width == e_st) bin_st = k;
+            if(e0+k*bin_width < e_dr) bin_dr = k+1;
+            if(e0+k*bin_width == e_dr) bin_dr = k;
         }
-        else { bin_st = e_st/bin_width+1; }
-
-        if(e_dr == (e_dr/bin_width)*bin_width)
-        {
-            bin_dr = e_dr/bin_width;
-        }
-        else { bin_dr = e_dr/bin_width+1; }
 
         for(int k=1; k<=h1->GetNbinsX(); ++k)
         {
@@ -65,6 +75,7 @@
         }
         sum = TMath::Sqrt(sum);
 
+        cout << "\n=> bin_stanga  = " << bin_st << "\n=> bin_dreapta = " << bin_dr;
         cout << "\nEficacitate_detectie(deltaE) = " << h1->Integral(bin_st, bin_dr) << " +/- " << sum << endl;
     }
 
