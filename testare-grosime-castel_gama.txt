@@ -1,0 +1,33 @@
+Testarea grosimii peretilor castelului
+C
+C Se testeaza grosimea caramizilor de Pb:
+C 1) Grosime de 10 cm (2 x caramizi)
+C 2) Grosime de 5 cm (1 x caramida)
+C 3) Fara perete
+C
+C ----- CELL CARD -----
+1   10  -11.35      -1     $ perete Pb
+2   11  -0.997      -2     $ sfera cu apa
+98  40  -1.205e-3   -91 1 2
+99  0                91
+
+C ----- SURFACE CARD -----
+1   RPP  -30 30 3 13 -30 30   $ grosime de 10 cm (2 caramizi Pb), L=l=60cm
+2   SPH   0 25 0 10
+91  SO    75
+
+C ----- DATA CARD -----
+MODE P
+IMP:P 1 1 1 0
+M10 82000  1.000000
+M11  1000  0.666667 &
+     8000  0.333333
+M40  6000  0.000150 &
+     7000  0.784429 &
+	 8000  0.210750 &
+	18000  0.004671
+C Se mai modifica energia fotonilor cu ERG
+SDEF  POS=0 0 0  PAR=P  ERG=4.44
+F6:P 2            $ tally F6 [MeV/g] in cell 2
+FM6 1.6022e-10    $ conversie [MeV/g]->[Gy]
+CTME 10
