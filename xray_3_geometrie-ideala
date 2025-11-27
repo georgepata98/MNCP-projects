@@ -33,10 +33,10 @@ c ---------- surface card ----------
 9   rcc  2.55 0 23.15  1 0 0  1.505          $ hole
 10  rpp  2.47 2.55  -2 2  21.4 24.9          $ filter
 11  rcc  0 0 23.15  -1.026 0 2.8191  0.96    $ anode
-12  rcc  16.2 0 23.15  1.5 0 0  3.12
-13  rcc  16.2 0 23.15  1.5 0 0  10
+12  rcc  6 0 23.15  1.5 0 0  3.12
+13  rcc  6 0 23.15  1.5 0 0  10
 c
-14  rcc  18.2 0 23.15  0.4 0 0  3.5     $ filtru de grosime 4 mm Al
+14  rcc  8 0 23.15  0.4 0 0  3.5     $ filtru de grosime 4 mm Al
 c
 c Probele cu celulele (volume apa):
 36  rcc  36.395 -1.95 24.1  0.105 0 0  1.75
